@@ -1,0 +1,23 @@
+﻿@model SimpleMusic.Models.Composer
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+    <h1>@Html.DisplayFor(model => model.Name)</h1>
+
+<div>
+    <h4>@Html.DisplayFor(model => model.Country.Name)</h4>
+    <img src="@Html.DisplayFor(model => model.Photo)" alt="@Html.DisplayFor(model => model.Name)" align="left"/>
+    <hr />
+        <h5>
+            @Html.DisplayNameFor(model => model.Bio)
+        </h5>
+        <p>
+            @Html.DisplayFor(model => model.Bio)
+        </p>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
