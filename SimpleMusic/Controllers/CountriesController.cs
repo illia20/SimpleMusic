@@ -55,7 +55,7 @@ namespace SimpleMusic.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,Info")] Country country)
         {
-            if (ModelState.IsValid)
+            if ((!CountryExists(country)) && ModelState.IsValid)
             {
                 _context.Add(country);
                 await _context.SaveChangesAsync();
@@ -147,6 +147,10 @@ namespace SimpleMusic.Controllers
         private bool CountryExists(int id)
         {
             return _context.Countries.Any(e => e.Id == id);
+        }
+        private bool CountryExists(Country country)
+        {
+            return _context.Countries.Any(e => e.Name == country.Name);
         }
     }
 }

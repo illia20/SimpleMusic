@@ -17,6 +17,7 @@ namespace SimpleMusic.Models
         [Display(Name = "Information")]
         [DataType(DataType.MultilineText)]
         public string Info { get; set; }
+        [Display(Name = "Composer")]
         public int ComposerId { get; set; }
 
         [ForeignKey("ComposerId")]

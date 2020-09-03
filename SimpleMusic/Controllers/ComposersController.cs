@@ -58,7 +58,7 @@ namespace SimpleMusic.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,Photo,Bio,CountryId")] Composer composer)
         {
-            if (ModelState.IsValid)
+            if ((!ComposerExists(composer)) && ModelState.IsValid)
             {
                 _context.Add(composer);
                 await _context.SaveChangesAsync();
@@ -154,6 +154,10 @@ namespace SimpleMusic.Controllers
         private bool ComposerExists(int id)
         {
             return _context.Composers.Any(e => e.Id == id);
+        }
+        private bool ComposerExists(Composer comp)
+        {
+            return _context.Composers.Any(e => e.Name == comp.Name);
         }
     }
 }
