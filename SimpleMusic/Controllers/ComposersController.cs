@@ -56,7 +56,7 @@ namespace SimpleMusic.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Photo,Bio,CountryId")] Composer composer)
+        public async Task<IActionResult> Create([Bind("Id,Name,Photo,Bio,CountryId,GeoLong,GeoLat")] Composer composer)
         {
             if ((!ComposerExists(composer)) && ModelState.IsValid)
             {
@@ -90,7 +90,7 @@ namespace SimpleMusic.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Photo,Bio,CountryId")] Composer composer)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Photo,Bio,CountryId,GeoLong,GeoLat")] Composer composer)
         {
             if (id != composer.Id)
             {

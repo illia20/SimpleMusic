@@ -4,6 +4,12 @@
     ViewData["Title"] = "Create";
 }
 
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+<script src="~/lib/jquery-ui/jquery-ui.js"></script>
+<script src="~/lib/jquery-ui/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="~/lib/jquery-ui/jquery-ui.css" >
 <h1>Create</h1>
 
 <h4>Composer</h4>
@@ -28,8 +34,23 @@
                 <span asp-validation-for="Bio" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CountryId" class="control-label"></label>
-                <select asp-for="CountryId" class ="form-control" asp-items="ViewBag.CountryId"></select>
+                <label asp-for="GeoLong" class="control-label"></label>
+                <input asp-for="GeoLong" class="form-control"></input>
+                <span asp-validation-for="GeoLong" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GeoLat" class="control-label"></label>
+                <input asp-for="GeoLat" class="form-control"></input>
+                <span asp-validation-for="GeoLat" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="ui-widget">
+                    <label asp-for="CountryId" class="control-label"></label>
+                    <input type="text" id="CountryName" class="form-control" data-autocomplete-source="@Url.Action("AutocompleteCountryId", "Input")" />
+                    <!--<select asp-for="CountryId" class="form-control" asp-items="ViewBag.CountryId"></select>-->
+                    <input asp-for="CountryId" type="hidden" id="autocompleteId" />
+                    <span asp-validation-for="CountryId" class="text-danger"></span>
+                </div>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
@@ -41,7 +62,7 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
-
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+<script src="~/js/autocomplete.js"></script>

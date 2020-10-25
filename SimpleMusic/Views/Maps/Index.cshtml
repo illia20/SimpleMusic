@@ -1,0 +1,78 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!--
+    <div class="row">
+        <div class="col-md-6">
+            The world from my view
+        </div>
+        <div class="col-md-6">
+            <div id="map" style="height:400px; width:600px;"></div>
+            <script>
+                var map;//25.06 -77.345
+                function initMap() {
+                    map = new google.maps.Map(document.getElementById('map'), {
+                        center: { lat: 25.06, lng: -77.345 },
+                        zoom: 8
+                    });
+                }
+            </script>
+            <script src="https://maps.googleapis.com/maps/api/js?callback=initMap"
+                    async defer></script>
+        </div>
+    </div>
+        -->
+    </head>
+<body>
+    <script src="https://maps.googleapis.com/maps/api/js?sensor=true" type="text/javascript" defer></script>
+    <style>
+
+    </style>
+    <div id="map" style="height:600px">
+        
+    </div>
+    @section scripts{ 
+        <script type="text/javascript">
+            $(document).ready(function () {
+                GetMap();
+            });
+            function GetMap() {
+                google.maps.visualRefresh = true;
+                var Kyiv = new google.maps.LatLng(50, 14);
+                var mapOptions = {
+                    zoom: 3,
+                    center: Kyiv,
+                    mapTypeId: google.maps.MapTypeId.G_NORMAL_MAP
+                };
+                var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+                $.getJSON('@Url.Action("GetData", "Maps")', function (data) {
+                    $.each(data, function (i, item) {
+                        console.log(data + " " + item);
+                        var marker = new google.maps.Marker({
+                            position: new google.maps.LatLng(item.geoLat, item.geoLong),
+                            map: map,
+                            title: 'Composers'
+                        });
+                        marker.setIcon('https://maps.google.com/mapfiles/ms/icons/blue-dot.png')
+                        var infowindow = new google.maps.InfoWindow({
+                            content: "<p>" + item.name + "<br><img src=\"" + item.photo + "\" height=\"100px\">"
+                        });
+                        google.maps.event.addListener(marker, 'click', function () {
+                            infowindow.open(map, marker);
+                        })
+                        google.maps.event.addListener(map, 'click', function () {
+                            infowindow.close();
+                            marker.open = false;
+                        })
+                    })
+                });
+            }
+        </script>
+    }
+</body>

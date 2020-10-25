@@ -4,6 +4,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - SimpleMusic</title>
+
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap_materia.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
@@ -28,6 +33,9 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Countries" asp-action="Index">Countries</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Maps" asp-action="Index">Maps</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                     </ul>
@@ -49,6 +57,10 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/lib/jquery-ui/jquery-ui.js"></script>
+    <script src="~/lib/jquery-ui/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="~/lib/jquery-ui/jquery-ui.css">
+
     @RenderSection("Scripts", required: false)
 </body>
 </html>

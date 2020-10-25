@@ -27,6 +27,8 @@ namespace SimpleMusic.Models
 
         [ForeignKey("CountryId")]
         public virtual Country Country { get; set; }
+        public double GeoLong { get; set; }
+        public double GeoLat { get; set; }
         public virtual ICollection<Piece> Pieces { get; set; }
     }
 }
