@@ -18,6 +18,33 @@
         </p>
 </div>
 <div>
+    <h5>@Html.DisplayNameFor(model => model.Pieces)</h5>
+    <div id="Pieces">
+
+    </div>
+</div>
+<div>
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
+<script type="text/javascript">
+    const uri = 'https://simplemusictest.azurewebsites.net/api/PiecesById/@Model.Id';
+    let pieces = [];
+    function getPieces() {
+        fetch(uri)
+            .then(response => response.json())
+            .then(data => displayPieces(data)).catch(error => console.error('Unable to get'));
+    }
+    function displayPieces(data) {
+        const text = document.getElementById('Pieces');
+        text.innerHTML = '';
+        data.forEach(Piece => {
+            let textNode = document.createTextNode(Piece.name + " ");
+            text.appendChild(textNode);
+        });
+        pieces = data;
+    }
+</script>
+<script type="text/javascript">
+    getPieces();
+</script>
