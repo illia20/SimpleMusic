@@ -27,7 +27,14 @@ namespace SimpleMusic
         {
             string connection = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<MusicDbContext>(options => options.UseSqlServer(connection));
+
+            services.AddAuthentication().AddGoogle(options =>
+            {
+                options.ClientId = "";
+                options.ClientSecret = "";
+            });
             services.AddControllersWithViews();
+            services.AddRazorPages();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,6 +55,7 @@ namespace SimpleMusic
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -55,6 +63,7 @@ namespace SimpleMusic
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
             });
         }
     }
